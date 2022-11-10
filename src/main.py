@@ -10,6 +10,8 @@ import time
 import random
 import string
 
+import example as example
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
@@ -43,8 +45,14 @@ async def log_requests(request, call_next):
 async def root():
     return {"message": "Hello World"}
 
+@app.on_event("startup")
+async def startup():
+    logger.info(f"starting Prometheus....")
+    example.main()
+
 def main():
     #uvicorn.run("main:app", host="127.0.0.1", port=5000, reload=True)
+   
     uvicorn.run("main:app", port=5000, reload=True)
 
 if __name__ == "__main__":
