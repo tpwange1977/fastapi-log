@@ -10,7 +10,7 @@ import time
 import random
 import string
 
-import example as example
+import prometheus_metrics as prometheus_metrics
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -43,17 +43,17 @@ async def log_requests(request, call_next):
 
 @app.get("/")
 async def root():
+    prometheus_metrics.TEST_METRICS.inc(1)
     return {"message": "Hello World"}
 
 @app.on_event("startup")
 async def startup():
-    logger.info(f"starting Prometheus....")
-    example.main()
+#    logger.info(f"starting Prometheus....")
+    prometheus_metrics.main()
 
 def main():
     #uvicorn.run("main:app", host="127.0.0.1", port=5000, reload=True)
-   
-    uvicorn.run("main:app", port=5000, reload=True)
+    uvicorn.run(app="main:app", host="127.0.0.1", port=5000, reload=True)
 
 if __name__ == "__main__":
     main()
