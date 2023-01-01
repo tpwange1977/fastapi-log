@@ -2,3 +2,4 @@ uvicorn
 fastapi
 loguru
 prometheus-client
+kubernetes
