@@ -1,3 +1,6 @@
+# Source: https://blog.varunsingh.in/how-tostartusingbackground-tasks-in-fastapis-d8bd15ad5ef5
+
+
 from fastapi import FastAPI, BackgroundTasks
 import uvicorn
 import time
